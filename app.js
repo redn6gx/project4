@@ -3,6 +3,16 @@ const app = express();
 app.engine('html', require('ejs').renderFile);
 app.use(express.static("public"));
 
+//faker module
+var faker = require('faker');
+var randomPhone = faker.phone.phoneNumber();
+console.log(randomPhone);
+
+//passing randomPhone variable to index.html in views
+app.get("/", function(req, res) {
+    res.render("index.html", {phone: randomPhone});
+});
+
 //routes
 app.get("/", function(req, res) {
     res.render("index.html");
